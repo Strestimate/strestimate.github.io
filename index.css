@@ -1,0 +1,12 @@
+h1{
+    background-color: rgb(211, 210, 222);
+}
+
+body{
+    font-family: Helvetica, sans-serif;
+}
+
+img, video{
+    background-color: rgb(211, 210, 222);
+    border-radius: 3%;
+}

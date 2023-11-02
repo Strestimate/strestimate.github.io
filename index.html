@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <title>PBL-alpha</title>
+    <!-- Load index.css -->
+    <link rel="stylesheet" href="index.css">
+    <!-- Load TensorFlow.js union bundle from a script tag -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <!-- Load MediaPipe face detection bundle from a script tag -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection"></script>
+    <!-- Load the crop and scale utility -->
+    <script src="./canvasCrop.js"></script>
+    <!-- Load TFmodel.js that conatins the models -->
+    <script src="./TFmodel.js"></script>
+</head>
+
+<body>
+    <div align="center">
+        <h1>Stress Detection via Facial Imaging</h1>
+        <h4>--- Test deployment in TensorflowJS ---</h4>
+        <hr><br>
+
+        <video id="video" height="240" autoplay></video><br>
+        <label for="capture">Take a photo:</label>
+        <button id="capture">Capture</button>
+        <canvas id="canvasCapture" hidden></canvas>
+
+
+        <label for="inImage">or upload an image:</label>
+        <input type="file" id="inImage" accept="image/*" onchange="loadFile(event)">
+
+        <h3>Current test image taken:</h3>
+        <img hidden id="testImage" crossorigin="anonymous"></img>
+        <img id="displayImage" width="200" height="240"></img>
+
+        <h4>Detected Stress Value: <span id="resultValue"></span></h4><br>
+        <h6>view console for logs</h6>
+        <hr>
+        <h5>---Detected Faces---</h5>
+
+    </div>
+
+
+    <script type="text/javascript">
+        //detection from image upload
+        var loadFile = function (event) {
+            //function runs on uploading of a file
+            var image = document.getElementById('testImage');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            runFullModel();//starts the model run
+            copyImage();//displayes the test image
+        };
+    </script>
+    <script type="text/javascript">
+        //detection from video capture
+        const video = document.getElementById('video');
+        const canvasCapture = document.getElementById('canvasCapture');
+        const capture = document.getElementById('capture');
+
+        // Getting the webcam stream
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    video.srcObject = stream;
+                    video.play();
+                });
+        }
+
+        // Capturing the image
+        capture.addEventListener('click', function () {
+            canvasCapture.getContext('2d').drawImage(video, 0, 0, canvasCapture.width, canvasCapture.height);
+            // Converting the canvas to a data URL and display the image
+            const dataURL = canvasCapture.toDataURL('image/png');
+
+            var image = document.getElementById('testImage');
+            image.src = dataURL;
+            runFullModel();//starts the model run
+            copyImage();//displayes the test image
+        });
+    </script>
+    <script type="text/javascript">
+        function copyImage() {
+            //to display a full size image on the page
+            var img = document.getElementById("displayImage");
+            img.src = document.getElementById("testImage").src;
+        }
+    </script>
+</body>
+
+</html>
