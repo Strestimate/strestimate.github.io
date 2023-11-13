@@ -33,7 +33,7 @@ async function testStress(image, SDmodel, FDmodel) {
     str_time = new Date().getTime();//setting start time
     const face = await extractFace(image, FDmodel);//extracting face
     elapsed = (new Date().getTime() - str_time);//setting end time
-    console.log("Face detection done in: " + elapsed + " ms")
+    console.log("Face detection done in: " + elapsed + " ms");
 
     const result = tf.tidy(() => {
         if (face == null) //if no face is detected
@@ -44,13 +44,13 @@ async function testStress(image, SDmodel, FDmodel) {
         str_time = new Date().getTime();//setting start time
         const prediction = SDmodel.predict(inputTensor);//running the prediction
         elapsed = (new Date().getTime() - str_time);//setting end time
-        console.log("Stress detection done in: " + elapsed + " ms")
+        console.log("Stress detection done in: " + elapsed + " ms");
 
         return prediction;
     });
 
-    const stressValue = await result.data()//storing the predicted value
-    console.log("Result value: " + stressValue)//logging exact value of result tensor
+    const stressValue = await result.data();//storing the predicted value
+    console.log("Result value: " + stressValue);//logging exact value of result tensor
 
     tf.dispose(result);
     console.log("Tensors Remaining: " + tf.memory().numTensors);//Tensors that are maintained for tests
