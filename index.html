@@ -4,20 +4,25 @@
 <head>
     <meta charset="utf-8" />
     <title>PBL-alpha</title>
-    <!-- Load index.css -->
-    <link rel="stylesheet" href="index.css">
+
     <!-- Load TensorFlow.js union bundle from a script tag -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <!-- Load MediaPipe face detection bundle from a script tag -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection"></script>
-    <!-- Load the crop and scale utility -->
-    <script src="./canvasCrop.js"></script>
-    <!-- Load TFmodel.js that conatins the models -->
+
+    <!-- Load the face extractor -->
+    <script src="./faceExtract.js"></script>
+    <!-- Load the stress detector -->
+    <script src="./stressDetect.js"></script>
+    <!-- Load the model file -->
     <script src="./TFmodel.js"></script>
+    <!-- Load index.css -->
+    <link rel="stylesheet" href="index.css">
 </head>
 
-<body>
+<body onload="loadDetector()">
+
     <div align="center">
         <h1>Stress Detection via Facial Imaging</h1>
         <h4>--- Test deployment in TensorflowJS ---</h4>
@@ -43,24 +48,16 @@
 
     </div>
 
+    <script type="text/javascript">
+        let detector;
+        let testImage = document.getElementById("testImage");
+        let modelReady = false;
 
-    <script type="text/javascript">
-        //detection from image upload
-        var loadFile = function (event) {
-            //function runs on uploading of a file
-            var image = document.getElementById('testImage');
-            image.src = URL.createObjectURL(event.target.files[0]);
-            runFullModel();//starts the model run
-            copyImage();//displayes the test image
-        };
-    </script>
-    <script type="text/javascript">
-        //detection from video capture
+        // Getting the webcam stream
         const video = document.getElementById('video');
         const canvasCapture = document.getElementById('canvasCapture');
         const capture = document.getElementById('capture');
 
-        // Getting the webcam stream
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function (stream) {
@@ -69,24 +66,43 @@
                 });
         }
 
-        // Capturing the image
+        //function to load the model on page load
+        async function loadDetector() {
+            detector = await loadModel();
+            modelReady = true;
+        }
+
+        //detection from image upload
+        let loadFile = function (event) {
+            testImage.src = URL.createObjectURL(event.target.files[0]);
+            runTest();
+        };
+
+        //detection from captured image
         capture.addEventListener('click', function () {
             canvasCapture.getContext('2d').drawImage(video, 0, 0, canvasCapture.width, canvasCapture.height);
-            // Converting the canvas to a data URL and display the image
-            const dataURL = canvasCapture.toDataURL('image/png');
-
-            var image = document.getElementById('testImage');
-            image.src = dataURL;
-            runFullModel();//starts the model run
-            copyImage();//displayes the test image
+            const dataURL = canvasCapture.toDataURL('image/png');// Converting the canvas to a data URL
+            testImage.src = dataURL;
+            runTest();
         });
-    </script>
-    <script type="text/javascript">
-        function copyImage() {
-            //to display a full size image on the page
-            var img = document.getElementById("displayImage");
-            img.src = document.getElementById("testImage").src;
+
+        //function to run the detector
+        async function runTest() {
+            testImage.onload = async function () {
+                if (modelReady) {
+                    let displayImage = document.getElementById("displayImage");
+                    displayImage.src = testImage.src;
+
+                    const result = await detector.getStress(testImage);//running the test
+
+                    const face=await detector.getFace(testImage);
+                    document.body.appendChild(face);//appending the detected face (just for debugging)
+
+                    document.getElementById("resultValue").innerHTML = result;
+                }
+            }
         }
+
     </script>
 </body>
 
