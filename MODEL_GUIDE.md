@@ -108,5 +108,5 @@ The function once executed will require you to run initialize the model again.
     detector.terminateModel();
     ```
 #### Note:
-* Peak tensor count comes to about 134 (I was getting around 1.2 GB of constant VRAM usage).
+* Peak tensor count comes to about 135 (I was getting around 1.2 GB of constant VRAM usage).
 * Executing the function clears the 127 tensors that are constantly allocated in the memory.
