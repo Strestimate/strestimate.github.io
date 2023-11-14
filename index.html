@@ -12,12 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection"></script>
 
+    <!-- Load the detector model file -->
+    <script src="./modelFiles/TFmodel.js"></script>
     <!-- Load the face extractor -->
-    <script src="./faceExtract.js"></script>
+    <script src="./modelFiles/faceExtract.js"></script>
     <!-- Load the stress detector -->
-    <script src="./stressDetect.js"></script>
-    <!-- Load the model file -->
-    <script src="./TFmodel.js"></script>
+    <script src="./modelFiles/stressDetect.js"></script>
+    
     <!-- Load index.css -->
     <link rel="stylesheet" href="index.css">
 </head>
@@ -39,7 +40,7 @@
         <input type="file" id="inImage" accept="image/*" onchange="loadFile(event)">
 
         <h3>Current test image taken:</h3>
-        <img hidden id="testImage" crossorigin="anonymous"></img>
+        <img hidden id="testImage"></img>
         <img id="displayImage" width="200" height="240"></img>
 
         <h4>Detected Stress Value: <span id="resultValue"></span></h4><br>
