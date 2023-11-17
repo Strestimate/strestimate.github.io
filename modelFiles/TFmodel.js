@@ -10,7 +10,7 @@ async function loadModel() {
     const model_Mediapipe = await faceDetection.SupportedModels.MediaPipeFaceDetector;
     const detectorConfig = {
         runtime: 'tfjs',
-        min_detection_confidence: 0.9,
+        min_detection_confidence: 0.6,
         maxFaces: 2,
     };//setting up the needed Face detection model
 
