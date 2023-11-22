@@ -101,12 +101,12 @@ The function only utilizes the face detection model. It is executed as a sub-par
 
 ## .terminateModel()
 A synchronous function that completely shuts down the models and clears the memory.
-The function once executed will require you to run initialize the model again.
+The function once executed will require you to initialize the model again.
 
 * Example usage:
     ```js
     detector.terminateModel();
     ```
 #### Note:
-* Peak tensor count comes to about 134 (I was getting around 1.2 GB of constant VRAM usage).
+* Peak tensor count comes to about 135 (I was getting around 1.2 GB of constant VRAM usage).
 * Executing the function clears the 127 tensors that are constantly allocated in the memory.

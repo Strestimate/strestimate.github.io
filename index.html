@@ -3,7 +3,7 @@
 <!-- ModelWorks V.1.0-->
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strestimate-alpha</title>
 
     <!-- Load TensorFlow.js union bundle from a script tag -->
@@ -18,7 +18,7 @@
     <script src="./modelFiles/faceExtract.js"></script>
     <!-- Load the stress detector -->
     <script src="./modelFiles/stressDetect.js"></script>
-    
+
     <!-- Load index.css -->
     <link rel="stylesheet" href="index.css">
 </head>
@@ -28,25 +28,37 @@
     <div align="center">
         <h1>Stress Detection via Facial Imaging</h1>
         <h4>--- Test deployment in TensorflowJS ---</h4>
-        <hr><br>
-
-        <video id="video" height="240" autoplay></video><br>
-        <label for="capture">Take a photo:</label>
-        <button id="capture">Capture</button>
-        <canvas id="canvasCapture" hidden></canvas>
-
-
-        <label for="inImage">or upload an image:</label>
-        <input type="file" id="inImage" accept="image/*" onchange="loadFile(event)">
-
-        <h3>Current test image taken:</h3>
-        <img hidden id="testImage"></img>
-        <img id="displayImage" width="200" height="240"></img>
-
-        <h4>Detected Stress Value: <span id="resultValue"></span></h4><br>
-        <h6>view console for logs</h6>
         <hr>
-        <h5>---Detected Faces---</h5>
+
+        <div id="introArea" class="introArea">
+            <div class="loader"></div>
+            <h4>Loading the Detection Model ...</h4>
+            <h6>- view console for load-up logs -</h6>
+            <hr>
+        </div>
+
+        <div id="testArea" class="testArea">
+            <br>
+            <video id="video" height="240" autoplay></video><br>
+            <label for="capture">Take a photo:</label>
+            <button id="capture">Capture</button>
+            <canvas id="canvasCapture" hidden></canvas>
+
+
+            <label for="inImage">or upload an image:</label>
+            <input type="file" id="inImage" accept="image/*" onchange="loadFile(event)">
+
+            <h3>Current test image taken:</h3>
+            <img hidden id="testImage"></img>
+            <img id="displayImage" width="200" height="240"></img>
+
+            <h4>Detected Stress Value: <span id="resultValue"></span></h4><br>
+
+
+            <h6>- view console for test logs -</h6>
+            <hr>
+            <h5>---Detected Faces---</h5>
+        </div>
 
     </div>
 
@@ -71,6 +83,10 @@
         //function to load the model on page load
         async function loadDetector() {
             detector = await loadModel();
+            testArea = document.getElementById('testArea');
+            testArea.style.display = 'block';
+            introArea = document.getElementById('introArea');
+            introArea.style.display = 'none';
             modelReady = true;
         }
 
@@ -97,7 +113,7 @@
 
                     const result = await detector.getStress(testImage);//running the test
 
-                    const face=await detector.getFace(testImage);
+                    const face = await detector.getFace(testImage);
                     document.body.appendChild(face);//appending the detected face (just for debugging)
 
                     document.getElementById("resultValue").innerHTML = result;
