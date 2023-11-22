@@ -48,7 +48,7 @@ The function returns a detector object which contains multiple functions.
 * The initial load up takes around 10-12 seconds.
 * Subsequent loads take 5-6 seconds if the browser has caching enabled.
 * Ideally execute this on page load. (warm-up can be provided as a separate function if needed)
-* The face detection model currently has been set to detect upto 2 faces with a minimum of 90% confidence.
+* The face detection model currently has been set to detect upto 2 faces with a minimum of 60% confidence.
 
 ### Provided functions:
   <ul>
