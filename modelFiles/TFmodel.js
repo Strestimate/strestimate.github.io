@@ -72,3 +72,4 @@ async function loadModel() {
 
     return { getStress, getAvgStress, getFace, terminateModel };//returning the functions for the model
 }
+

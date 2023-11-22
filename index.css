@@ -10,3 +10,24 @@ img, video{
     background-color: rgb(211, 210, 222);
     border-radius: 3%;
 }
+
+.testArea{
+    display: none;
+}
+
+.introArea{
+    display: block;
+}
+
+.loader {
+    border: 16px solid #bdbdbd; /* Light grey */
+    border-top: 16px solid #292929; /* Blue */
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

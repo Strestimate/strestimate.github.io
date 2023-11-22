@@ -101,7 +101,8 @@ The function only utilizes the face detection model. It is executed as a sub-par
 
 ## .terminateModel()
 A synchronous function that completely shuts down the models and clears the memory.
-The function once executed will require you to run initialize the model again.
+The function once executed will require you to initialize the model again.
+
 
 * Example usage:
     ```js
