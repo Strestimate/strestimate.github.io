@@ -5,11 +5,55 @@ body{
     /*font-family: Helvetica, sans-serif;*/
     font-family: "Inconsolata", sans-serif;
     /*padding-top: 56px;*/    
+    background-color: rgb(125,152,161);
 }
-@keyframes body {
-  to {
-    background-color: rgb(19, 48, 97);
-  }}
+
+.header{
+  display:grid;
+  position:relative;
+  z-index:1000;
+}
+
+
+.about-me{
+
+    display: grid;
+    padding-top:5%;
+    padding-bottom:5%;
+    grid-template-columns: 800px 1fr;
+    gap: 1rem;
+    align-items: center;
+    max-width: 100%;
+    margin: 0 auto;
+    font: 800 100%/1.5;
+    font-size:x-large;
+    animation-delay: 4s;
+
+}
+.about-me-text h2{
+  font-weight:500;
+  margin-bottom: 5%;  
+  font-size:xx-large;
+  font: "Inconsolata"
+  
+}
+.about-me-text{
+  padding:30px;
+}
+.about-me img{
+  max-height:350px;
+  max-width: 100%;
+  position: relative;
+  float:none;
+  margin-left: 15%;
+}
+
+@media (max-width: 650px) {
+  .about-me {
+    display: block;
+    font-size: 80%;
+  }
+} 
 
 .sticky-top {
     position: -webkit-sticky;
@@ -19,32 +63,35 @@ body{
     
   }
 
+
 .intro {
+  z-index: 20;;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 520px;
+    margin-top:20px;
+    height: 560px;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://images.unsplash.com/photo-1534078362425-387ae9668c17");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    position:center;
+    position:relative;
   }
   .intro h1 {
     font-family: Inconsolata;
-    font-size: 80px;
+    font-size:400%;
     color: #fff;
     font-weight:900;
     text-transform: uppercase;
     margin: 0;
   }
-  .pop-outin {
-    animation: 4s anim-popoutin ease infinite;
+  .intro h1.pop {
+    animation: 3s abah ease;
   }
   
-  @keyframes anim-popoutin {
+  @keyframes abah {
     0% {
       color: rgb(255, 255, 255);
       transform: scale(0);
