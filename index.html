@@ -5,12 +5,17 @@
 <head>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Strestimate-alpha</title>
+    <!--for frontend-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
     <!-- Load TensorFlow.js union bundle from a script tag -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <!-- Load MediaPipe face detection bundle from a script tag -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection"></script>
+    
 
     <!-- Load the detector model file -->
     <script src="./modelFiles/TFmodel.js"></script>
@@ -20,13 +25,48 @@
     <script src="./modelFiles/stressDetect.js"></script>
     <!-- Load index.css -->
     <link rel="stylesheet" href="index.css">
+
+
 </head>
 
 <body onload="loadDetector()">
+    <!--For the sticky Navigation Bar-->
+    <header class="header">
+        <div class="w3-top">
+            <div class="w3-row w3-padding w3-black">
+            <div class="w3-col s4">
+                <a href="#" class="w3-button w3-block w3-black">HOME</a>
+            </div>
+            <div class="w3-col s4">
+                <a href="#models" class="w3-button w3-block w3-black">MODEL</a>
+            </div>
+            <div class="w3-col s4">
+                <a href="documentation.html" class="w3-button w3-block w3-black">DOCS</a>
+            </div>
+            </div>
+        </div>
+    </header>
 
-    <div align="center">
+  
+    <main>
+        <!--Title-->
+        <div class="intro">
+            <h1 class='pop-outin'>
+                STRESTIMATOR
+            </h1>
+        </div>
+    
+        <div class="about-me">
+        <div class="about-me-text">
+            <h2>Our Model</h2>
+        </div>
+        </div>
+  </main>
+
+    <div align ="center">
         <h1>Stress Detection via Facial Imaging</h1>
         <h4>--- Test deployment in TensorflowJS ---</h4>
+        <p>Welcome to Strestimator – Your Stress Detection Solution! Using facial imaging, our model, Strestimator, analyzes your expressions to provide instant insights into your stress levels. Experience a new era of well-being – scroll to try it out.</p>
         <hr>
 
         <div id="introArea" class="introArea">
