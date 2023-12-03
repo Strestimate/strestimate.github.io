@@ -1,11 +1,75 @@
-h1{
-    background-color: rgb(211, 210, 222);
-}
+
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
 
 body{
-    font-family: Helvetica, sans-serif;
+    /*font-family: Helvetica, sans-serif;*/
+    font-family: "Inconsolata", sans-serif;
+    /*padding-top: 56px;*/    
 }
+@keyframes body {
+  to {
+    background-color: rgb(19, 48, 97);
+  }}
 
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    
+  }
+
+.intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("https://images.unsplash.com/photo-1534078362425-387ae9668c17");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position:center;
+  }
+  .intro h1 {
+    font-family: Inconsolata;
+    font-size: 80px;
+    color: #fff;
+    font-weight:900;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .pop-outin {
+    animation: 4s anim-popoutin ease infinite;
+  }
+  
+  @keyframes anim-popoutin {
+    0% {
+      color: rgb(255, 255, 255);
+      transform: scale(0);
+      opacity: 0;
+      text-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    25% {
+      color: rgb(172, 172, 172);
+      transform: scale(2);
+      opacity: 1;
+      text-shadow: 3px 10px 5px rgba(0, 0, 0, 0.5);
+    }
+    50% {
+      color: rgb(252, 252, 252);
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      /* animate nothing to add pause at the end of animation */
+      transform: scale(1);
+      opacity: 1;
+      text-shadow: 1px 0 0 rgba(0, 0, 0, 0);
+    }
+  }
 img, video{
     background-color: rgb(211, 210, 222);
     border-radius: 3%;
