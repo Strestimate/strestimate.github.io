@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result Page</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata">
+    <style>
+        body {
+            font-family: 'Inconsolata', sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #averageScoreDisplay {
+            font-size: 24px;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        #backButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Average Stress Score</h1>
+    <p id="averageScoreDisplay"></p>
+
+    <button id="backButton">Go Back to Index</button>
+
+    <script>
+        // Retrieve the average stress score from sessionStorage
+        const averageScore = sessionStorage.getItem('averageScore');
+
+        // Display the average stress score
+        document.getElementById('averageScoreDisplay').innerText = 'Average Stress Score: ' + averageScore;
+
+        // Add a click event listener to the back button
+        document.getElementById('backButton').addEventListener('click', function () {
+            // Redirect back to index.html
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
