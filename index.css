@@ -48,11 +48,12 @@ body{
   margin-left: 15%;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 800px) {
   .about-me {
     display: block;
     font-size: 80%;
   }
+
 } 
 
 .sticky-top {
@@ -81,16 +82,34 @@ body{
   }
   .intro h1 {
     font-family: Inconsolata;
-    font-size:400%;
+    font-size: 80px;
     color: #fff;
-    font-weight:900;
+    font-weight: 900;
     text-transform: uppercase;
     margin: 0;
   }
+  .intro h1:hover {
+    color: peachpuff;
+  }
+  
+  @media (max-width: 600px) {
+    .intro h1 {
+      font-size: 60px; /* Adjust the font size for smaller screens */
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .intro h1 {
+      font-size: 40px; /* Adjust the font size for even smaller screens */
+    }
+  }
+  
+
   .intro h1.pop {
     animation: 3s abah ease;
   }
   
+
   @keyframes abah {
     0% {
       color: rgb(255, 255, 255);
@@ -142,3 +161,63 @@ img, video{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  
+
+.beginButton {
+  align-items: center;
+  background-color: #848484;
+  border: 2px solid #111;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #111;
+  cursor: pointer;
+  display: flex;
+  font-family: Inconsolata;
+  font-size: 20px;
+  height: 48px;
+  justify-content: center;
+  line-height: 24px;
+  max-width: 100%;
+  padding: 0 25px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.beginButton:after {
+  background-color: #111;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 48px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform .2s ease-out;
+  z-index: -1;
+}
+
+.beginButton:hover:after {
+  transform: translate(0, 0);
+}
+
+.beginButton:active {
+  background-color: #646464;
+  outline: 0;
+}
+
+.beginButton:hover {
+  outline: 0;
+}
+
+@media (min-width: 768px) {
+  .beginButton {
+    padding: 0 40px;
+  }
+}
