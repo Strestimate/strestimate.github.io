@@ -25,6 +25,7 @@
     <script src="./modelFiles/stressDetect.js"></script>
     <!-- Load index.css -->
     <link rel="stylesheet" href="index.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
 
 </head>
@@ -41,7 +42,7 @@
                 <a href="#Model" class="w3-button w3-block w3-black">MODEL</a>
             </div>
             <div class="w3-col s4">
-                <a href="documentation.html" class="w3-button w3-block w3-black">DOCS</a>
+                <a href="Doc.html" class="w3-button w3-block w3-black">DOCS</a>
             </div>
             </div>
         </div>
@@ -72,11 +73,13 @@
         </div>
   </main>
 
+  <br>
     <div id="Model" align ="center">
-        <h1>Our Model</h1>
-        <h4>--- Test deployment in TensorflowJS ---</h4>
-                <hr>
+        <hr>
+        <h5>When you're ready click begin , the camera will record you for 5 seconds and then you will be redirected to results</h5>
+                
 
+        
         <div id="introArea" class="introArea">
             <div class="loader"></div>
             <h4>Loading the Detection Model ...</h4>
@@ -85,89 +88,16 @@
         </div>
 
         <div id="testArea" class="testArea">
-            <br>
-            <video id="video" height="240" autoplay></video><br>
-            <label for="capture">Take a photo:</label>
-            <button id="capture">Capture</button>
+            <button class="beginButton" id="beginButton" onclick="startVideo()">Begin</button>
+            <video id="video" height="240" autoplay hidden></video><br>
             <canvas id="canvasCapture" hidden></canvas>
-
-
-            <label for="inImage">or upload an image:</label>
-            <input type="file" id="inImage" accept="image/*" onchange="loadFile(event)">
-
-            <h3>Current test image taken:</h3>
-            <img hidden id="testImage"></img>
-            <img id="displayImage" width="200" height="240"></img>
-
-            <h4>Detected Stress Value: <span id="resultValue"></span></h4><br>
-
             <h6>- view console for test logs -</h6>
-            <hr>
-            <h5>---Detected Faces---</h5>
         </div>
-
+        
+        
     </div>
 
-    <script type="text/javascript">
-        let detector;
-        let testImage = document.getElementById("testImage");
-        let modelReady = false;
-
-        // Getting the webcam stream
-        const video = document.getElementById('video');
-        const canvasCapture = document.getElementById('canvasCapture');
-        const capture = document.getElementById('capture');
-
-        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(function (stream) {
-                    video.srcObject = stream;
-                    video.play();
-                });
-        }
-
-        //function to load the model on page load
-        async function loadDetector() {
-            detector = await loadModel();
-            testArea = document.getElementById('testArea');
-            testArea.style.display = 'block';
-            introArea = document.getElementById('introArea');
-            introArea.style.display = 'none';
-            modelReady = true;
-        }
-
-        //detection from image upload
-        let loadFile = function (event) {
-            testImage.src = URL.createObjectURL(event.target.files[0]);
-            runTest();
-        };
-
-        //detection from captured image
-        capture.addEventListener('click', function () {
-            canvasCapture.getContext('2d').drawImage(video, 0, 0, canvasCapture.width, canvasCapture.height);
-            const dataURL = canvasCapture.toDataURL('image/png');// Converting the canvas to a data URL
-            testImage.src = dataURL;
-            runTest();
-        });
-
-        //function to run the detector
-        async function runTest() {
-            testImage.onload = async function () {
-                if (modelReady) {
-                    let displayImage = document.getElementById("displayImage");
-                    displayImage.src = testImage.src;
-
-                    const result = await detector.getStress(testImage);//running the test
-
-                    const face = await detector.getFace(testImage);
-                    document.body.appendChild(face);//appending the detected face (just for debugging)
-
-                    document.getElementById("resultValue").innerHTML = result;
-                }
-            }
-        }
-
-    </script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 
 </html>
